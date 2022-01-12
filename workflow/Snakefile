@@ -1,0 +1,23 @@
+import pandas as pd
+
+configfile: "../config/config.yaml"
+include: "rules/common.smk"
+include: "rules/references.smk"
+include: "rules/trim.smk"
+include: "rules/star.smk"
+include: "rules/htseq.smk"
+include: "rules/deseq2.smk"
+
+
+    
+SAMPLES = pd.read_csv(config["sample_file"])['sample_id']
+    
+rule all:
+    input: 
+        config["genome"]["outdir"]+"/"+config["genome"]["species"]+".fasta",
+        config["genome"]["outdir"]+"/"+config["genome"]["species"]+".gtf",
+        directory(config["genome"]["outdir"]+"/"+config["genome"]["species"]),
+        expand('../results/star/{sample}/{sample}_Aligned.sortedByCoord.out.bam', sample=SAMPLES),
+        expand("../results/htseq/{sample}_counts.tsv", sample=SAMPLES),
+        "../results/deseq2/all.rds",
+        "../results/deseq2/normcounts.tsv"

@@ -1,0 +1,17 @@
+
+sample_file: ../config/UMN_project4_samples.csv
+in_dir: /home/langlois/shared/UI_data_release/UMN_project4
+
+trimmomatic:
+    threads: 32
+    other: ILLUMINACLIP:TruSeq3-PE.fa:2:30:10 SLIDINGWINDOW:4:20
+    
+genome:
+    species: anas_platyrhynchos_platyrhynchos
+    release: 105
+    datatype: dna
+    build: CAU_duck1.0
+    outdir: /home/langlois/shared/ref_genomes/star_indices
+
+deseq:
+    model: ~ifn_treatment+timepoint

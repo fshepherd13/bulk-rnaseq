@@ -1,0 +1,3 @@
+sample_id,cell_type,species,ifn_treatment,timepoint
+IS24_CCL141_1,CCL-141,duck,chIFN_low,3h
+IS24_CCL141_2,CCL-141,duck,chIFN_high,3h

@@ -1,0 +1,6 @@
+channels:
+    - bioconda
+    - conda-forge
+    - default
+dependencies:
+    - htseq=1.99.2

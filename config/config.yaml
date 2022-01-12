@@ -1,12 +1,12 @@
 
-sample_file: ../config/UMN_project4_samples.csv
-in_dir: /home/langlois/shared/UI_data_release/UMN_project4
+sample_file: ../config/UMN_project4_samples.csv #Must be a path relative to the Snakefile
+in_dir: /home/langlois/shared/UI_data_release/UMN_project4 #Directory that contains the raw reads
 
-trimmomatic:
+trimmomatic: #Trimmomatic parameters
     threads: 32
     other: ILLUMINACLIP:TruSeq3-PE.fa:2:30:10 SLIDINGWINDOW:4:20
     
-genome:
+genome: #STAR parameters for building the reference genome
     species: anas_platyrhynchos_platyrhynchos
     release: 105
     datatype: dna

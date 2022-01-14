@@ -1,6 +1,6 @@
 rule get_genome:
     output:
-        config["genome"]["outdir"]+"/"+config["genome"]["species"]+".fasta"
+        config["genome"]["outdir"]+"/"+config["genome"]["species"]+"/genome.fasta"
     params:
         species=config["genome"]["species"],
         build=config["genome"]["build"],
@@ -14,7 +14,7 @@ rule get_genome:
 
 rule get_gtf:
     output:
-        config["genome"]["outdir"]+"/"+config["genome"]["species"]+".gtf"
+        config["genome"]["outdir"]+"/"+config["genome"]["species"]+"/genome.gtf"
     params:
         species=config["genome"]["species"],
         build=config["genome"]["build"],
@@ -29,17 +29,24 @@ rule get_gtf:
 
 rule star_index:
     input:
-        fasta = config["genome"]["outdir"]+"/"+config["genome"]["species"]+".fasta",
-        gtf = config["genome"]["outdir"]+"/"+config["genome"]["species"]+".gtf"
+        fasta = config["genome"]["outdir"]+"/"+config["genome"]["species"]+"/genome.fasta",
+        gtf = config["genome"]["outdir"]+"/"+config["genome"]["species"]+"/genome.gtf"
     output:
-        directory(config["genome"]["outdir"]+"/"+config["genome"]["species"])
+        directory(config["genome"]["outdir"]+"/"+config["genome"]["species"]+"/index")
     message:
         "Testing STAR index"
-    threads:
-        4
-    params:
-        extra = ""
+    threads: 16
+    conda:
+        "../envs/star.yaml"
     log:
         "logs/star_index.log"
-    wrapper:
-        "0.84.0/bio/star/index"
+    shell:
+        """
+        STAR \
+            --runMode genomeGenerate \
+            --runThreadN {threads} \
+            --genomeDir {output} \
+            --genomeFastaFiles {input.fasta} \
+            --sjdbGTFfile {input.gtf} \
+            --sjdbOverhang 150
+        """

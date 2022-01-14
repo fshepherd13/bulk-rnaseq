@@ -3,7 +3,7 @@ rule star:
         fq1 = rules.trim.output.r1_paired,
         fq2 = rules.trim.output.r2_paired
     params:
-        index = directory(config["genome"]["outdir"]+"/"+config["genome"]["species"]),
+        index = rules.star_index.output,
         outdir = '../results/star/{sample}'
     output:
         bam = '../results/star/{sample}/{sample}_Aligned.sortedByCoord.out.bam'

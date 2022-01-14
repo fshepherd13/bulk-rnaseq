@@ -13,10 +13,10 @@ include: "rules/deseq2.smk"
 SAMPLES = pd.read_csv(config["sample_file"])['sample_id']
     
 rule all:
-    input: 
-        config["genome"]["outdir"]+"/"+config["genome"]["species"]+".fasta",
-        config["genome"]["outdir"]+"/"+config["genome"]["species"]+".gtf",
-        directory(config["genome"]["outdir"]+"/"+config["genome"]["species"]),
+    input:
+        config["genome"]["outdir"]+"/"+config["genome"]["species"]+"/genome.gtf",
+        config["genome"]["outdir"]+"/"+config["genome"]["species"]+"/genome.fasta",
+        directory(config["genome"]["outdir"]+"/"+config["genome"]["species"]+"/index"),
         expand('../results/star/{sample}/{sample}_Aligned.sortedByCoord.out.bam', sample=SAMPLES),
         expand("../results/htseq/{sample}_counts.tsv", sample=SAMPLES),
         "../results/deseq2/all.rds",

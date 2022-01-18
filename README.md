@@ -20,6 +20,6 @@ To run the pipeline, first run the command `conda activate snakemake`. This will
 
 Next, update the files under `config/` to match your experiment. The config.yaml file should be updated to specify file paths to the raw reads. There are other parameters that can be adjusted for the trimming step and for STAR, to choose the reference species of choice. 
 
-To run the full pipeline from your command line, run `snakemake --cores 32 --use-conda`. 
+To run the full pipeline from your command line, run `snakemake --cores 32 --use-conda`. Or, submit the `pipeline.sh` bash script to the MSI slurm scheduler by entering the workflow directory and running `sbatch pipeline.sh` from the terminal. The #SBATCH commands in the pipeline.sh script are suggested options and should be edited to fit the needs of your analysis (large datasets could require more memory or time, etc.). 
 
 If you have multiple reference species to map to, right now the best way to approach is to run the pipeline twice. The first run, only specify the samples in the sample.csv file that should be mapped to the given species. Make sure your `config.yaml` file contains the correct species under the references section. Then, re-write your samples.csv file to specify only the remaining files that should be mapped to the 2nd reference species. Update the `config.yaml` file to contain the correct reference specices and run the pipeline again.

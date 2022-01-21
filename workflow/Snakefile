@@ -19,5 +19,4 @@ rule all:
         directory(config["genome"]["outdir"]+"/"+config["genome"]["species"]+"/index"),
         expand('../results/star/{sample}/{sample}_Aligned.sortedByCoord.out.bam', sample=SAMPLES),
         expand("../results/htseq/{sample}_counts.tsv", sample=SAMPLES),
-        "../results/deseq2/all.rds",
-        "../results/deseq2/normcounts.tsv"
+        "../results/deseq2/dds.rds"

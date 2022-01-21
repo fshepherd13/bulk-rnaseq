@@ -1,6 +1,6 @@
 rule htseq:
     input:
-        rules.star.output
+        '../results/star/{sample}/{sample}_Aligned.sortedByCoord.out.bam'
     params:
         gtf=rules.get_gtf.output
     output:

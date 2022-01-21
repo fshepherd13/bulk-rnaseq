@@ -9,7 +9,7 @@ in_dir: /home/langlois/shared/UI_data_release/UMN_project4 #Directory that conta
 #################################################################
 
 #############Parameters for "normal" genome indices#############
-#If you need to use a STAR index that is a run of the mill ensembl host genome with no modifications, you can specify the parameters for your host genome of interest here instead. Note that the genome index you need might already exist, so check /home/langlois/shared/ref_genomes/star_indices first. If you need a species that's not already there, specify the species, release, etc. below and the snakemake code will automatically download the correct files and index them for you.
+#If you need to use a STAR index that is a run of the mill ensembl host genome with no modifications, you can specify the parameters for your host genome of interest here instead. Specify the species, release, etc. below and the snakemake code will automatically download the correct files and index them for you.
 #If using this section, delete the hastags so the Snakefile reads them.
 #genome: 
 #    species: gallus_gallus

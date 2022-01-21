@@ -2,8 +2,7 @@ rule deseq2:
     input:
         expand("../results/htseq/{sample}_counts.tsv", sample=SAMPLES)
     output:
-        "../results/deseq2/all.rds",
-        "../results/deseq2/normcounts.tsv"
+        "../results/deseq2/dds.rds"
     params:
         indir="../results/htseq",
         metadata=config["sample_file"],

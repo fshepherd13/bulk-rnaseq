@@ -1,17 +1,29 @@
-
 sample_file: ../config/UMN_project4_samples.csv #Must be a path relative to the Snakefile
 in_dir: /home/langlois/shared/UI_data_release/UMN_project4 #Directory that contains the raw reads
+
+#############Parameters for custom genome indices#############
+#If you are using a custom STAR index that is, for example, a hybrid of a host and pathogen, create it by following the script at workflow/custom_ref.sh and putting the relative file path here. If not, see the next section. The custom_rules section will ensure that the snakefile runs a star_mapping rule that takes the appropriate genome index file. If using this section, delete the hastags so the Snakefile reads them.
+#index: ../references/chicken_iav_star_genome/star_index 
+#custom_rules: 
+#    - rules/star_custom.smk
+#################################################################
+
+#############Parameters for "normal" genome indices#############
+#If you need to use a STAR index that is a run of the mill ensembl host genome with no modifications, you can specify the parameters for your host genome of interest here instead. Note that the genome index you need might already exist, so check /home/langlois/shared/ref_genomes/star_indices first. If you need a species that's not already there, specify the species, release, etc. below and the snakemake code will automatically download the correct files and index them for you.
+#If using this section, delete the hastags so the Snakefile reads them.
+#genome: 
+#    species: gallus_gallus
+#    release: 105
+#    datatype: dna
+#    build: GRCg6a
+#    outdir: /home/langlois/shared/ref_genomes/star_indices #No need to change this unless there is a specific reason to save your genome somewhere else.
+#custom_rules: 
+#    - rules/star_basic.smk
+#################################################################
 
 trimmomatic: #Trimmomatic parameters, no need to change unless you want something specific here
     threads: 32
     other: ILLUMINACLIP:TruSeq3-PE.fa:2:30:10 SLIDINGWINDOW:4:20
-    
-genome: #STAR parameters for building the reference genome
-    species: gallus_gallus
-    release: 105
-    datatype: dna
-    build: GRCg6a
-    outdir: /home/langlois/shared/ref_genomes/star_indices #Shouldn't really have to change
 
 deseq:
-    model: ~ifn_treatment+timepoint 
+    model: ~ifn_treatment+timepoint #The DESeq2 model that contains comparisons you want to make among your gene expression data. See the DESeq2 docs for info.

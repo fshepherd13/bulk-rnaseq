@@ -10,22 +10,13 @@ model <- snakemake@params[["model"]]
 #Construct dataframe that connects the htseq count file name with the metadata in the config file
 #Read in metadata from the config file
 meta <- read.csv(snakemake@params[["metadata"]], header=TRUE) %>%
-    mutate(filename=paste(sample_id,"_counts.tsv",sep="")) #Add row that indicates what the corresponding htseq file is called
-
-meta <- meta[, c("sample_id", "filename", "cell_type", "species", "ifn_treatment", "timepoint")]
+    mutate(filename=paste(sample_id,"_counts.tsv",sep="")) %>% #Add row that indicates what the corresponding htseq file is called
+    select(filename, everything()) %>% #Next two lines reorder the dataframe so that the sample_id column is first, followed by the newly created filename variable, followed by all the other columns
+    select(sample_id, everything())
 
 dds <- DESeqDataSetFromHTSeqCount(sampleTable = meta,
                                        directory = directory,
                                        design=as.formula(model))
 
-#Remove columns with low feature counts (i.e uninformative columns)
-dds <- dds[ rowSums(counts(dds)) >= 10, ]
-
-#Perform normalization and differential expression analysis
-dds <- DESeq(dds)
-
-#Write RDS object
-saveRDS(dds, file=snakemake@output[[1]])
-# Write normalized counts
-norm_counts = counts(dds, normalized=T)
-write.table(data.frame("gene"=rownames(norm_counts), norm_counts), file=snakemake@output[[2]], sep='\t', row.names=F)
+#Save DESEQ data set to an R file
+saveRDS(dds, file = snakemake@output[[1]])

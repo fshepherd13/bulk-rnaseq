@@ -1,5 +1,5 @@
 
-sample_file: ../config/UMN_project4_duck_samples.csv #Must be a path relative to the Snakefile
+sample_file: ../config/UMN_project4_samples.csv #Must be a path relative to the Snakefile
 in_dir: /home/langlois/shared/UI_data_release/UMN_project4 #Directory that contains the raw reads
 
 trimmomatic: #Trimmomatic parameters, no need to change unless you want something specific here

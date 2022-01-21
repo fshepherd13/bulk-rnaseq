@@ -1,17 +1,17 @@
 
-sample_file: ../config/UMN_project4_samples.csv #Must be a path relative to the Snakefile
+sample_file: ../config/UMN_project4_duck_samples.csv #Must be a path relative to the Snakefile
 in_dir: /home/langlois/shared/UI_data_release/UMN_project4 #Directory that contains the raw reads
 
-trimmomatic: #Trimmomatic parameters
+trimmomatic: #Trimmomatic parameters, no need to change unless you want something specific here
     threads: 32
     other: ILLUMINACLIP:TruSeq3-PE.fa:2:30:10 SLIDINGWINDOW:4:20
     
 genome: #STAR parameters for building the reference genome
-    species: anas_platyrhynchos_platyrhynchos
+    species: gallus_gallus
     release: 105
     datatype: dna
-    build: CAU_duck1.0
-    outdir: /home/langlois/shared/ref_genomes/star_indices
+    build: GRCg6a
+    outdir: /home/langlois/shared/ref_genomes/star_indices #Shouldn't really have to change
 
 deseq:
-    model: ~ifn_treatment+timepoint
+    model: ~ifn_treatment+timepoint 

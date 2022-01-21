@@ -5,18 +5,15 @@ SAMPLES = pd.read_csv(config["sample_file"])['sample_id']
 include: "rules/common.smk"
 include: "rules/references.smk"
 include: "rules/trim.smk"
-include: "rules/star.smk"
 include: "rules/htseq.smk"
 include: "rules/deseq2.smk"
-
+# Include custom rules defined in the config.
+if "custom_rules" in config:
+    for rule_file in config["custom_rules"]:
+        include: rule_file
 
     
     
 rule all:
     input:
-        config["genome"]["outdir"]+"/"+config["genome"]["species"]+"/genome.gtf",
-        config["genome"]["outdir"]+"/"+config["genome"]["species"]+"/genome.fasta",
-        directory(config["genome"]["outdir"]+"/"+config["genome"]["species"]+"/index"),
-        expand('../results/star/{sample}/{sample}_Aligned.sortedByCoord.out.bam', sample=SAMPLES),
-        expand("../results/htseq/{sample}_counts.tsv", sample=SAMPLES),
         "../results/deseq2/dds.rds"

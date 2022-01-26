@@ -3,7 +3,7 @@ in_dir: /home/langlois/shared/UI_data_release/UMN_project4 #Directory that conta
 
 #############Parameters for custom genome indices#############
 #If you are using a custom STAR index that is, for example, a hybrid of a host and pathogen, create it by following the script at workflow/custom_ref.sh and putting the relative file path here. If not, see the next section. The custom_rules section will ensure that the snakefile runs a star_mapping rule that takes the appropriate genome index file. If using this section, delete the hastags so the Snakefile reads them.
-#index: ../references/chicken_iav_star_genome/star_index 
+#index: ../resources/chicken_iav_star_genome/
 #custom_rules: 
 #    - rules/star_custom.smk
 #################################################################
@@ -21,9 +21,9 @@ in_dir: /home/langlois/shared/UI_data_release/UMN_project4 #Directory that conta
 #    - rules/star_basic.smk
 #################################################################
 
-trimmomatic: #Trimmomatic parameters, no need to change unless you want something specific here
+trimmomatic: #Trimmomatic parameters, no need to change unless you want something specific here. Although you may need to change the adapter fasta file given to the ILLUMINACLIP parameter depending on your library prep. More options are located in the directory ../resources/adapters/
     threads: 32
-    other: ILLUMINACLIP:TruSeq3-PE.fa:2:30:10 SLIDINGWINDOW:4:20
+    other: ILLUMINACLIP:../resources/adapters/TruSeq3-PE.fa:2:30:10 SLIDINGWINDOW:4:20
 
 deseq:
     model: ~ifn_treatment+timepoint #The DESeq2 model that contains comparisons you want to make among your gene expression data. See the DESeq2 docs for info.

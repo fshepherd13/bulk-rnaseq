@@ -5,7 +5,6 @@ SAMPLES = pd.read_csv(config["sample_file"])['sample_id']
 include: "rules/common.smk"
 include: "rules/references.smk"
 include: "rules/trim.smk"
-include: "rules/htseq.smk"
 include: "rules/deseq2.smk"
 # Include custom rules defined in the config.
 if "custom_rules" in config:

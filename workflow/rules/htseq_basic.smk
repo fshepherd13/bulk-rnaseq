@@ -1,4 +1,4 @@
-rule htseq:
+rule htseq_basic:
     input:
         '../results/star/{sample}/{sample}_Aligned.sortedByCoord.out.bam'
     params:

@@ -19,5 +19,5 @@ rule trim:
         trimmomatic PE -threads {params.threads} \
         {input.r1} {input.r2} \
         {output.r1_paired} {output.r1_unpaired} {output.r2_paired} {output.r2_unpaired} \
-        {params.other}
+        {params.other} &> {log}
         '''

@@ -1,6 +1,6 @@
 import pandas as pd
 configfile: "../config/config.yaml"
-SAMPLES = pd.read_csv(config["sample_file"])['sample_id']
+SAMPLES = pd.read_csv(config["sample_file"]).iloc[:,0]
 
 include: "rules/common.smk"
 include: "rules/trim.smk"

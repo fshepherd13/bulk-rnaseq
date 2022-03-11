@@ -3,7 +3,6 @@ configfile: "../config/config.yaml"
 SAMPLES = pd.read_csv(config["sample_file"])['sample_id']
 
 include: "rules/common.smk"
-include: "rules/references.smk"
 include: "rules/trim.smk"
 include: "rules/deseq2.smk"
 # Include custom rules defined in the config.

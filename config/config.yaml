@@ -3,25 +3,26 @@ in_dir: /home/langlois/shared/UI_data_release/UMN_project4 #Directory that conta
 
 #############Parameters for custom genome indices#############
 #If you are using a custom STAR index that is, for example, a hybrid of a host and pathogen, create it by following the script at workflow/custom_ref.sh and putting the relative file path here. If not, see the next section. The custom_rules section will ensure that the snakefile runs a star_mapping rule that takes the appropriate genome index file. If using this section, delete the hastags so the Snakefile reads them.
-#index: ../resources/chicken_iav_star_genome/ #Path of the hybrid host/pathogen genome index created by STAR
-#gtf: ../resources/chicken_iav_star_genome/ #Path of the hybrid host/pathogen gtf file
-#custom_rules: 
-#    - rules/star_custom.smk
-#    - rules/htseq_custom.smk
+index: /home/langlois/shared/ref_genomes/star_indices/chicken_iav_zap/index #Path of the hybrid host/pathogen genome index created by STAR
+gtf: /home/langlois/shared/ref_genomes/star_indices/chicken_iav_zap/GRCg6a_PR8_zap.gtf #Path of the hybrid host/pathogen gtf file
+custom_rules: 
+    - rules/star_custom.smk
+    - rules/htseq_custom.smk
 #################################################################
 
 #############Parameters for "normal" genome indices#############
 #If you need to use a STAR index that is a run of the mill ensembl host genome with no modifications, you can specify the parameters for your host genome of interest here instead. Specify the species, release, etc. below and the snakemake code will automatically download the correct files and index them for you.
 #If using this section, delete the hastags so the Snakefile reads them.
-genome: 
-    species: gallus_gallus
-    release: 105
-    datatype: dna
-    build: GRCg6a
-    outdir: /home/langlois/shared/ref_genomes/star_indices #No need to change this unless there is a specific reason to save your genome somewhere else.
-custom_rules: 
-    - rules/star_basic.smk
-    - rule/htseq_basic.smk
+#genome: 
+#    species: gallus_gallus
+#    release: 105
+#    datatype: dna
+#    build: GRCg6a
+#    outdir: /home/langlois/shared/ref_genomes/star_indices #No need to change this unless there is a specific reason to save your genome somewhere else.
+#custom_rules: 
+#    - rules/star_basic.smk
+#    - rule/htseq_basic.smk
+#    - rule/references.smk
 #################################################################
 
 trimmomatic: #Trimmomatic parameters, no need to change unless you want something specific here. Although you may need to change the adapter fasta file given to the ILLUMINACLIP parameter depending on your library prep. More options are located in the directory ../resources/adapters/

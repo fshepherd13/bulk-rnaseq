@@ -20,9 +20,9 @@ custom_rules:
 #    build: GRCg6a
 #    outdir: /home/langlois/shared/ref_genomes/star_indices #No need to change this unless there is a specific reason to save your genome somewhere else.
 #custom_rules: 
+#    - rules/references.smk
 #    - rules/star_basic.smk
-#    - rule/htseq_basic.smk
-#    - rule/references.smk
+#    - rules/htseq_basic.smk
 #################################################################
 
 trimmomatic: #Trimmomatic parameters, no need to change unless you want something specific here. Although you may need to change the adapter fasta file given to the ILLUMINACLIP parameter depending on your library prep. More options are located in the directory ../resources/adapters/

@@ -31,6 +31,8 @@ rule star_index:
         gtf = config["genome"]["outdir"]+"/"+config["genome"]["species"]+"/genome.gtf"
     params:
         dir = config["genome"]["outdir"]+"/"+config["genome"]["species"]+"/index"
+    output:
+        directory(config["genome"]["outdir"]+"/"+config["genome"]["species"]+"/index")
     message:
         "Testing STAR index"
     threads: 16

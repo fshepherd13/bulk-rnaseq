@@ -1,9 +1,9 @@
 rule star:
     input:
         fq1 = rules.trim.output.r1_paired,
-        fq2 = rules.trim.output.r2_paired
+        fq2 = rules.trim.output.r2_paired,
+        index = rules.star_index.output
     params:
-        index = rules.star_index.output,
         outdir = '../results/star/{sample}'
     output:
         bam = '../results/star/{sample}/{sample}_Aligned.sortedByCoord.out.bam'

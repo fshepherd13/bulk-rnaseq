@@ -16,7 +16,7 @@ rule star:
     shell:
         """
         STAR --runThreadN {threads} \
-            --genomeDir {params.index} \
+            --genomeDir {input.index} \
             --readFilesIn {input.fq1} {input.fq2} \
             --outSAMtype BAM SortedByCoordinate \
             --outReadsUnmapped Fastx \
